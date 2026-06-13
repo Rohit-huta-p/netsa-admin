@@ -7,6 +7,7 @@ import authRoutes from './routes/auth';
 import prospectRoutes from './routes/prospects';
 import statsRoutes from './routes/stats';
 import templateRoutes from './routes/templates';
+import adminRoutes from './routes/admins';
 
 export function createApp(): Express {
   const app = express();
@@ -25,7 +26,7 @@ export function createApp(): Express {
   app.use('/api/prospects', prospectRoutes);
   app.use('/api/stats', statsRoutes);
   app.use('/api/templates', templateRoutes);
-  // app.use('/api/admins', adminRoutes);
+  app.use('/api/admins', adminRoutes);
 
   const clientDist = path.resolve(__dirname, '../../client/dist');
   app.use(express.static(clientDist));
