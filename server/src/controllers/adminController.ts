@@ -5,7 +5,7 @@ import { AdminUser, hashPassword } from '../models/AdminUser';
 const createSchema = z.object({
   email: z.string().email(),
   name: z.string().min(1),
-  password: z.string().min(7),
+  password: z.string().min(8),
   role: z.enum(['owner', 'member']).optional(),
 });
 
