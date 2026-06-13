@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+body { margin: 0; background: #0A0A0F; color: #E7E7EA; font-family: 'Outfit', system-ui, sans-serif; }
+
+@layer components {
+  .icon-btn { @apply w-7 h-7 inline-flex items-center justify-center rounded-md border border-ink-border hover:bg-ink-surface transition; }
+  .btn { @apply text-sm px-3 py-2 rounded-md border border-ink-border hover:bg-ink-surface transition inline-flex items-center gap-2; }
+  .btn-primary { @apply bg-netsa-orange text-[#3A1505] border-netsa-orange font-medium hover:brightness-105; }
+  .field { @apply w-full bg-ink-surface border border-ink-border rounded-md px-3 py-2 text-sm outline-none focus:border-netsa-orange; }
+}
