@@ -4,6 +4,7 @@ import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import path from 'path';
 import authRoutes from './routes/auth';
+import prospectRoutes from './routes/prospects';
 
 export function createApp(): Express {
   const app = express();
@@ -19,7 +20,7 @@ export function createApp(): Express {
 
   // Routers (added across Tasks 3-10). Each import + use line is added in its task.
   app.use('/api/auth', authRoutes);
-  // app.use('/api/prospects', prospectRoutes);
+  app.use('/api/prospects', prospectRoutes);
   // app.use('/api/stats', statsRoutes);
   // app.use('/api/templates', templateRoutes);
   // app.use('/api/admins', adminRoutes);
