@@ -30,7 +30,7 @@ export function ProspectDrawer({ prospect, intro, onClose }: { prospect: Prospec
         <label className="text-xs text-zinc-400 mt-4 block">Meeting</label>
         <div className="flex gap-2 mt-1">
           <input type="datetime-local" className="field" value={meeting} onChange={(e) => setMeeting(e.target.value)} />
-          <button className="btn" onClick={() => update.mutate({ id: prospect._id, body: { meetingAt: meeting ? new Date(meeting).toISOString() : undefined, status: 'meeting_scheduled' } })}>Save</button>
+          <button className="btn" onClick={() => update.mutate({ id: prospect._id, body: { meetingAt: meeting ? new Date(meeting).toISOString() : null, status: 'meeting_scheduled' } })}>Save</button>
         </div>
 
         <label className="text-xs text-zinc-400 mt-5 block">Notes</label>

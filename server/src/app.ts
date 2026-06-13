@@ -1,4 +1,4 @@
-import express, { Express } from 'express';
+import express, { Express, Request, Response, NextFunction } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
@@ -31,6 +31,12 @@ export function createApp(): Express {
   const clientDist = path.resolve(__dirname, '../../client/dist');
   app.use(express.static(clientDist));
   app.get('*', (_req, res) => res.sendFile(path.join(clientDist, 'index.html')));
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  });
 
   return app;
 }

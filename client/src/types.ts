@@ -24,6 +24,11 @@ export interface Prospect {
   createdAt: string;
   updatedAt: string;
 }
+/** Body type for PATCH /prospects/:id — nullable date fields trigger $unset on the server. */
+export type ProspectUpdate = Partial<Omit<Prospect, 'followUpAt' | 'meetingAt'>> & {
+  followUpAt?: string | null;
+  meetingAt?: string | null;
+};
 export interface Funnel { byStatus: Partial<Record<ProspectStatus, number>>; dueTodayCount: number; overdueCount: number; }
 export interface Template { _id: string; key: string; label: string; channel: string; body: string; }
 export interface AdminUser { id: string; email: string; name: string; role: 'owner' | 'member'; }

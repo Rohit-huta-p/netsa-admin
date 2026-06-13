@@ -12,7 +12,7 @@ export async function listProspects(req: Request, res: Response): Promise<void> 
   if (priority && PRIORITIES.includes(priority as Priority)) filter.priority = priority;
   if (city) filter.city = city;
   if (assignedTo) filter.assignedTo = assignedTo;
-  if (q) filter.name = { $regex: q, $options: 'i' };
+  if (q) filter.name = { $regex: q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), $options: 'i' };
   const items = await Prospect.find(filter).sort({ followUpAt: 1, updatedAt: -1 }).limit(500);
   res.json({ items });
 }

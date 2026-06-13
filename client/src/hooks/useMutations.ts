@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import api from '../lib/api';
-import { Channel, Prospect } from '../types';
+import { Channel, Prospect, ProspectUpdate } from '../types';
 
 export function useProspectMutations() {
   const qc = useQueryClient();
@@ -11,7 +11,7 @@ export function useProspectMutations() {
 
   const create = useMutation({ mutationFn: (body: Partial<Prospect>) => api.post('/prospects', body), onSuccess: invalidate });
   const update = useMutation({
-    mutationFn: ({ id, body }: { id: string; body: Partial<Prospect> }) => api.patch(`/prospects/${id}`, body),
+    mutationFn: ({ id, body }: { id: string; body: ProspectUpdate }) => api.patch(`/prospects/${id}`, body),
     onSuccess: invalidate,
   });
   const remove = useMutation({ mutationFn: (id: string) => api.delete(`/prospects/${id}`), onSuccess: invalidate });
