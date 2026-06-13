@@ -91,18 +91,22 @@ export async function importProspects(rows: ParsedRow[], createdBy: string): Pro
       continue;
     }
     const cat = (r.category || '').toLowerCase();
-    await Prospect.create({
-      name: r.name,
-      category: CATEGORIES.includes(cat as never) ? cat : undefined,
-      city: r.city || 'Pune',
-      instagram: r.instagram,
-      phone: r.phone,
-      email: r.email,
-      source: r.source,
-      priority: ['high', 'medium', 'low'].includes((r.priority || '').toLowerCase()) ? (r.priority as string).toLowerCase() : 'medium',
-      createdBy,
-    });
-    inserted++;
+    try {
+      await Prospect.create({
+        name: r.name,
+        category: (CATEGORIES as string[]).includes(cat) ? cat : undefined,
+        city: r.city || 'Pune',
+        instagram: r.instagram,
+        phone: r.phone,
+        email: r.email,
+        source: r.source,
+        priority: ['high', 'medium', 'low'].includes((r.priority || '').toLowerCase()) ? (r.priority as string).toLowerCase() : 'medium',
+        createdBy,
+      });
+      inserted++;
+    } catch (err: unknown) {
+      errors.push({ row: r, reason: err instanceof Error ? err.message : 'DB error' });
+    }
   }
   return { inserted, skipped, errors };
 }
