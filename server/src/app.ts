@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import path from 'path';
+import authRoutes from './routes/auth';
 
 export function createApp(): Express {
   const app = express();
@@ -17,7 +18,7 @@ export function createApp(): Express {
   app.use('/api', rateLimit({ windowMs: 60 * 1000, max: 300, standardHeaders: true, legacyHeaders: false }));
 
   // Routers (added across Tasks 3-10). Each import + use line is added in its task.
-  // app.use('/api/auth', authRoutes);
+  app.use('/api/auth', authRoutes);
   // app.use('/api/prospects', prospectRoutes);
   // app.use('/api/stats', statsRoutes);
   // app.use('/api/templates', templateRoutes);
