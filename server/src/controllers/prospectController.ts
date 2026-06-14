@@ -13,7 +13,10 @@ export async function listProspects(req: Request, res: Response): Promise<void> 
   if (city) filter.city = city;
   if (assignedTo) filter.assignedTo = assignedTo;
   if (q) filter.name = { $regex: q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), $options: 'i' };
-  const items = await Prospect.find(filter).sort({ followUpAt: 1, updatedAt: -1 }).limit(500);
+  const items = await Prospect.find(filter)
+    .populate('createdBy', 'name')
+    .sort({ followUpAt: 1, updatedAt: -1 })
+    .limit(500);
   res.json({ items });
 }
 

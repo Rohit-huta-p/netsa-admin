@@ -21,6 +21,7 @@ export interface Prospect {
   meetingAt?: string;
   lastContactedAt?: string;
   lastChannel?: Channel;
+  createdBy?: { _id: string; name: string };
   createdAt: string;
   updatedAt: string;
 }

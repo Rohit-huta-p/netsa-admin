@@ -16,7 +16,11 @@ export function ProspectDrawer({ prospect, intro, onClose }: { prospect: Prospec
       <div className="absolute inset-0 bg-black/40" />
       <div onClick={(e) => e.stopPropagation()} className="relative w-full max-w-md bg-ink-deep border-l border-ink-border h-full overflow-y-auto p-5">
         <div className="flex justify-between items-start">
-          <div><h2 className="font-display text-xl">{prospect.name}</h2><p className="text-sm text-zinc-500">{[prospect.category, prospect.city].filter(Boolean).join(' · ')}</p></div>
+          <div>
+            <h2 className="font-display text-xl">{prospect.name}</h2>
+            <p className="text-sm text-zinc-500">{[prospect.category, prospect.city].filter(Boolean).join(' · ')}</p>
+            {prospect.createdBy && <p className="text-xs text-zinc-600 mt-0.5">Added by {prospect.createdBy.name}</p>}
+          </div>
           <button className="icon-btn" onClick={onClose}><X size={16} /></button>
         </div>
 
