@@ -1,13 +1,15 @@
 import { useState, FormEvent } from 'react';
 import { X } from 'lucide-react';
 import { useProspectMutations } from '../hooks/useMutations';
+import { useAuth } from '../auth/AuthContext';
 import { Category, Priority } from '../types';
 
 const CATEGORIES: Category[] = ['dancer', 'actor', 'choreographer', 'musician', 'organizer', 'other'];
 
 export function AddProspectForm({ onClose }: { onClose: () => void }) {
   const { create } = useProspectMutations();
-  const [form, setForm] = useState({ name: '', category: '', city: 'Pune', instagram: '', phone: '', source: '', priority: 'medium' as Priority });
+  const { user } = useAuth();
+  const [form, setForm] = useState({ name: '', category: '', city: 'Pune', instagram: '', phone: '', source: '', priority: 'medium' as Priority, addedByName: '' });
   const [error, setError] = useState('');
 
   function set<K extends keyof typeof form>(k: K, v: (typeof form)[K]) { setForm((f) => ({ ...f, [k]: v })); }
@@ -33,6 +35,7 @@ export function AddProspectForm({ onClose }: { onClose: () => void }) {
           <div><label className="text-xs text-zinc-400">Instagram</label><input className="field mt-1" placeholder="@handle" value={form.instagram} onChange={(e) => set('instagram', e.target.value)} /></div>
           <div><label className="text-xs text-zinc-400">Phone</label><input className="field mt-1" placeholder="+91…" value={form.phone} onChange={(e) => set('phone', e.target.value)} /></div>
           <div><label className="text-xs text-zinc-400">Source</label><input className="field mt-1" placeholder="referral, IG…" value={form.source} onChange={(e) => set('source', e.target.value)} /></div>
+          <div className="col-span-2"><label className="text-xs text-zinc-400">Added by</label><input className="field mt-1" placeholder="Your name" value={form.addedByName} onChange={(e) => set('addedByName', e.target.value)} /></div>
           <div><label className="text-xs text-zinc-400">Priority</label>
             <select className="field mt-1" value={form.priority} onChange={(e) => set('priority', e.target.value as Priority)}>
               <option value="high">high</option><option value="medium">medium</option><option value="low">low</option>

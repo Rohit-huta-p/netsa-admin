@@ -19,7 +19,7 @@ export function ProspectDrawer({ prospect, intro, onClose }: { prospect: Prospec
           <div>
             <h2 className="font-display text-xl">{prospect.name}</h2>
             <p className="text-sm text-zinc-500">{[prospect.category, prospect.city].filter(Boolean).join(' · ')}</p>
-            {prospect.createdBy && <p className="text-xs text-zinc-600 mt-0.5">Added by {prospect.createdBy.name}</p>}
+            {prospect.addedByName && <p className="text-xs text-zinc-600 mt-0.5">Added by {prospect.addedByName}</p>}
           </div>
           <button className="icon-btn" onClick={onClose}><X size={16} /></button>
         </div>

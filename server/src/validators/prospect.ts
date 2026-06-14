@@ -15,6 +15,7 @@ export const createProspectSchema = z
     email: z.string().email().optional().or(z.literal('')),
     source: z.string().optional(),
     priority: priorityEnum.optional(),
+    addedByName: z.string().optional(),
   })
   .refine((d) => !!(d.phone && d.phone.trim()) || !!(d.instagram && d.instagram.trim()), {
     message: 'Need a phone or instagram',

@@ -23,6 +23,7 @@ export interface IProspect extends Document {
   meetingAt?: Date;
   lastContactedAt?: Date;
   lastChannel?: Channel;
+  addedByName?: string;
   createdBy: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
@@ -54,6 +55,7 @@ const prospectSchema = new Schema<IProspect>(
     meetingAt: Date,
     lastContactedAt: Date,
     lastChannel: { type: String, enum: CHANNELS },
+    addedByName: { type: String, trim: true },
     createdBy: { type: Schema.Types.ObjectId, ref: 'AdminUser', required: true },
   },
   { timestamps: true }
